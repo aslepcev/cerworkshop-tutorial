@@ -1,0 +1,6 @@
+Since we will be using k3s, we can simply copy paste the previous API terraform configuration and change the label of the server. 
+
+Run the following commands. 
+
+1. terraform plan
+2. terraform apply

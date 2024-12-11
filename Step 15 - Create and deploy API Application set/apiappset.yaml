@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: my-multi-cluster-api-app
+  namespace: default
+spec:
+  generators:
+    - list:
+        elements:
+          - clusterName: cerX-api-de-fra-2 #Replace with your cluster name
+            clusterUrl: https://172.233.43.188:6443 #Replace with your cluster IP
+          - clusterName: cerX-api-jp-osa #Replace with your cluster name
+            clusterUrl: https://172.233.43.188:6443 #Replace with your cluster IP   
+          - clusterName: cerX-api-us-lax #Replace with your cluster name
+            clusterUrl: https://172.233.43.188:6443 #Replace with your cluster IP
+          - clusterName: cerX-api-us-mia #Replace with your cluster name
+            clusterUrl: https://172.233.43.188:6443 #Replace with your cluster IP                                 
+  template:
+    metadata:
+      name: '{{clusterName}}-api-app'
+    spec:
+      project: default
+      source:
+        repoURL: 'https://git.slepcevic.eu/CERHackathonXX/Workshop' #Replace with your Gitea repo URL
+        targetRevision: main #Replace with your Gitea branch
+        path: api #folder with the deployment files
+      destination:
+        server: '{{clusterUrl}}'
+        namespace: default
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true

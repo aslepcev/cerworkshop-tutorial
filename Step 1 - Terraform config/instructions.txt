@@ -1,0 +1,5 @@
+Create a new folder called "terraform"
+Copy the files providers.tf and variables.tf into the terraform folder. 
+We are creating 2 variables, one for Linode token and other for our userid. 
+IMPORTANT: Replace the userid variable content with your own userID
+

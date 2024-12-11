@@ -1,0 +1,12 @@
+Now that we have a VM and a LKE cluster running, let's start by deploying our API stack. 
+Let's start by creating a new file called "api.tf" and copy the example for the k3s-api instance. 
+Notice the difference in how we reference our regions. This will be very useful later!
+
+Now we need to create a folder called "yaml" where we will keep all of our cloud-init yaml files. 
+
+Copy the file "k3s.yaml" from this folder to the "yaml" folder in your root. 
+
+Run the following commands. 
+
+1. terraform plan
+2. terraform apply

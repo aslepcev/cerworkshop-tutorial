@@ -1,0 +1,7 @@
+Since we will not be using k3s, we need to copy the cloud-init yaml file which we will use to deploy our AI infrastructure. 
+Copy the ai.yaml file into the "yaml" folder we created earlier. 
+Create a file called ai.tf and copy the contents of ai.tf in this folder to your ai.tf file. 
+Run the following commands. 
+
+1. terraform plan
+2. terraform apply

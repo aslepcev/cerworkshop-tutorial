@@ -1,0 +1,49 @@
+1. Login to Harbor using the instance's PTR record. 
+2. Create a new project
+3. Make it public
+
+
+4. SSH to harbor node
+5. Modify nginx conf
+cd /etc/nginx/sites-available/
+nano 172.xxx
+
+Add the following under location /
+
+    proxy_set_header X-Forwarded-Proto https;
+    client_max_body_size 500M;
+
+Example: 
+
+
+  location / {
+       proxy_pass         http://localhost:8000;
+       proxy_http_version 1.1;
+       proxy_set_header   Upgrade \$http_upgrade;
+       proxy_set_header X-Forwarded-Proto https;
+       client_max_body_size 500M;
+       proxy_set_header   Connection "upgrade";
+       proxy_set_header   Host $http_host;
+    }
+
+5. Restart Nginx with: service nginx restart
+
+6 Move to /home folder using the following command: cd /home
+
+Run the following commands in sequence:
+
+
+git clone https://github.com/slepix/WebshopDemo
+cd WebshopDemo
+docker build -t webshopdemo:latest .
+docker login https://172-236-192-145.ip.linodeusercontent.com <- Replace this with your Harbor instance PTR record. Login with your Harbor credentials. 
+docker tag webshopdemo:latest 172-236-192-145.ip.linodeusercontent.com/workshop/webshopdemo:latest <- Replace PROJECT and URL with your project name you created in step 2 and harbor instance URL.
+docker push 172-236-192-145.ip.linodeusercontent.com/workshop/webshopdemo:latest
+
+cd ..
+git clone https://github.com/slepix/FlaskDemoAPI
+cd FlaskDemoAPI
+docker build -t flaskdemoapi:latest .
+docker tag flaskdemoapi:latest 172-236-192-145.ip.linodeusercontent.com/workshop/flaskdemoapi:latest
+docker push 172-236-192-145.ip.linodeusercontent.com/workshop/flaskdemoapi:latest
+logout

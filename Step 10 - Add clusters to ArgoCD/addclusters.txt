@@ -1,0 +1,29 @@
+As you may have noticed, we have deploy our infra only in a single region. 
+Let's go to variables.tf and uncomment the line which contains more regions. 
+Delete the line with the single region. 
+
+
+Go to cloud.linode.com, click on Kubernetes, then on your LKE cluster. Finally click on "Kubernetes dashboard". 
+
+Go to cloud.linode.com and click on "Nodebalancers"
+Find the nodebalancer starting with ccm-xxxxxx and copy over the IP address. 
+
+Now it's time to login to ArgoCD and add our clusters. 
+
+Paste your IP instead of YOURNODEBALANCERIP
+
+1. argocd login YOURNODEBALANCERIP --insecure
+
+Modify the following examples so the match your userID. Repeat for each cluster deployed. 
+
+argocd cluster add --kubeconfig ./cer2-frontend-de-fra-2 default --name frontend-de-fra-2
+argocd cluster add --kubeconfig ./cer2-api-de-fra-2 default --name api-de-fra-2
+
+argocd cluster add --kubeconfig ./cerXX-frontend-jp-osa default --name frontend-jp-osa
+argocd cluster add --kubeconfig ./cerXX-api-jp-osa default --name api-jp-osa
+
+argocd cluster add --kubeconfig ./cerXX-frontend-us-mia default --name frontend-us-mia
+argocd cluster add --kubeconfig ./cerXX-api-us-mia default --name api-us-mia
+
+argocd cluster add --kubeconfig ./cerXX-frontend-us-lax default --name frontend-us-lax 
+argocd cluster add --kubeconfig ./cerXX-api-us-lax  default --name api-us-lax 

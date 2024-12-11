@@ -1,0 +1,8 @@
+We are ready to start deploying our first piece of infrastructure!
+Let's start by creating a file called "vm.tf" and paste the contents of the vm.tf inside. 
+
+After the file has been created, we can run the following commands:
+
+1. terraform init
+2. terraform plan
+3. terraform apply

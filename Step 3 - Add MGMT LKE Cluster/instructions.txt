@@ -1,0 +1,7 @@
+Now that our demo VM is up, let's quickly deploy a LKE cluster. We're gonna need it later!
+Create a new file called "mgmt.tf" and copy over the contents of the mgmt.tf file in this folder. 
+
+Like in the previous example, let's run our terraform plan and terraform apply commands.
+
+1. terraform plan
+2. terraform apply

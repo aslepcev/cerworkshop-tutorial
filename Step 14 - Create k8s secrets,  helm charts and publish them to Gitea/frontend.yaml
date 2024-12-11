@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: 172-236-212-71.ip.linodeusercontent.com/test/webshopdemo@sha256:2462cce93cf3d6d24bd67b10b79f5d70db9f4a6f7df412f65e99f7def0805cac # Custom Harbor registry. Replace with your own. 
+          ports:
+            - containerPort: 3000 # Application's listening port
+          env:
+            - name: NEXT_PUBLIC_API_URL
+              value: "https://api.example.com" # Replace with your API URL            
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  selector:
+    app: nginx
+  ports:
+    - protocol: TCP
+      port: 80        # Exposed service port
+      targetPort: 3000    # Application's listening port
+  type: ClusterIP         # ClusterIP for Traefik compatibility
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx-ingress
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+spec:
+  tls:
+    - hosts:
+        - "*.akmworkshop.eu"  # The domain for the wildcard certificate
+      secretName: wildcard-cert # Reference the Secret containing the wildcard certificate
+  rules:
+    - host: "*.akmworkshop.eu"  # Rule for wildcard domain
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: nginx-service
+                port:
+                  number: 80
+    - host: "*.labs.akamaiuiweb.com"  # Rule for akmuniversity.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: nginx-service
+                port:
+                  number: 80

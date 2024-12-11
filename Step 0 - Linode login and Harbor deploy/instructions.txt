@@ -1,0 +1,7 @@
+1. Login to linode via https://cloud.linode.com
+2. Create API token - top right corner
+3. Deploy HarborVM from marketplace
+
+Go to https://git.slepcevic.net and log in with the same username and password as for cloud.linode.com
+Create a new repository called "CERWorkshop01", replacing 01 with your user ID. 
+Make the repository PUBLIC

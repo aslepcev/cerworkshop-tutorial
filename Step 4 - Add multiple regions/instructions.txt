@@ -1,0 +1,4 @@
+Specifying regions manually is tedious when dealing with a large infrastructure. 
+Let's go to our variable.tf file and create a variable called "specified_regions"
+You can see the full example in the "variables.tf" file in this folder.
+Copy it over into your variables.tf file. Make sure to keep the regions as specified. 

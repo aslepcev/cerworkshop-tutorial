@@ -1,0 +1,12 @@
+#cloud-config
+runcmd:
+  - curl -sfL https://get.k3s.io | sh -
+  - mkdir -p /root/.kube
+  - |
+    TOKEN=$(curl -X PUT -H "Metadata-Token-Expiry-Seconds: 3600" http://169.254.169.254/v1/token)
+    PUBLIC_IP=$(curl -H "Metadata-Token: $TOKEN" http://169.254.169.254/v1/network | grep "ipv4.public" | awk -F'[:/ ]+' '{print $2}')
+    CONFIGNAME=$(curl -H "Metadata-Token: $TOKEN" http://169.254.169.254/v1/instance | grep -oP '^label:\s*\K.*')
+    echo "Public IP: $PUBLIC_IP" > /var/log/public_ip.log
+    sed -i "s/127.0.0.1/${PUBLIC_IP}/" /etc/rancher/k3s/k3s.yaml
+    cp /etc/rancher/k3s/k3s.yaml /root/.kube/${CONFIGNAME}
+  - chown root:root /root/.kube/${CONFIGNAME}

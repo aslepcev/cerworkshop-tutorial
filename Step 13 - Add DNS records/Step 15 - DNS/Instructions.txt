@@ -1,0 +1,5 @@
+cd /home/coder
+cp dns.sh terraform/
+chmod +x dns.sh
+Make sure the file is saved with LF line ending (bottom right side of your VS Code)
+run ./dns.sh

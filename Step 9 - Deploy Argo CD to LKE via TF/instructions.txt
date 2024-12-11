@@ -1,0 +1,10 @@
+Now things get a bit more complicated. 
+We will use Terraform provider for Helm and Kubernetes to deploy ArgoCD on the LKE cluster we created earlier. 
+
+Copy over the helm.tf to your terraform folder. 
+In this file we are defining our Helm deployment for ArgoCD. 
+
+Next we need to copy over the locals.tf and update our provider.tf file with additional providers. 
+
+1. terraform plan
+2. terraform apply

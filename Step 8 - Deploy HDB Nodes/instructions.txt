@@ -1,0 +1,10 @@
+With our database, we are using a slightly different approach to using cloud-init.
+We are templating some of the values which will be passed to the cloud-init file using terraform templating. 
+
+1. Copy over the hdb.tpl file to the yaml folder 
+2. Create a new file called database.tf and copy over the content of the database.tf file. 
+
+Run the following commands. 
+
+1. terraform plan
+2. terraform apply

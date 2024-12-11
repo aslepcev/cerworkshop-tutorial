@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: my-multi-cluster-frontend
+  namespace: default
+spec:
+  generators:
+    - list:
+        elements:
+          - clusterName: cerX-frontend-de-fra-2 #Replace with your cluster name
+            clusterUrl: https://172.233.43.205:6443 #Replace with your cluster IP
+          - clusterName: cerX-frontend-jp-osa #Replace with your cluster name
+            clusterUrl: https://172.233.43.205:6443 #Replace with your cluster IP     
+          - clusterName: cerX-frontend-us-mia #Replace with your cluster name
+            clusterUrl: https://172.233.43.205:6443 #Replace with your cluster IP  
+          - clusterName: cerX-frontend-us-lax #Replace with your cluster name
+            clusterUrl: https://172.233.43.205:6443 #Replace with your cluster IP                                   
+  template:
+    metadata:
+      name: '{{clusterName}}-frontend-app'
+    spec:
+      project: default
+      source:
+        repoURL: 'https://git.slepcevic.eu/CERHackathon0X/Workshop' #Replace with your Gitea repo URL
+        targetRevision: main #Replace with your Gitea branch
+        path: frontend #folder with the deployment files
+      destination:
+        server: '{{clusterUrl}}'
+        namespace: default
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true

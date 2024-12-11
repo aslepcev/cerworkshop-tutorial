@@ -1,0 +1,30 @@
+1. Create Kubernetes secret containing our SSL certificate:
+
+kubectl --kubeconfig="cer2-frontend-de-fra-2" create secret tls wildcard-cert  --namespace kube-system --cert=akmworkshop.crt --key=akmworkshop.key
+kubectl --kubeconfig="cer2-api-de-fra-2" create secret tls wildcard-cert  --namespace kube-system --cert=akmworkshop.crt --key=akmworkshop.key
+kubectl --kubeconfig="cer2-frontend-de-fra-2" create secret tls wildcard-cert  --namespace default --cert=akmworkshop.crt --key=akmworkshop.key
+kubectl --kubeconfig="cer2-api-de-fra-2" create secret tls wildcard-cert  --namespace default --cert=akmworkshop.crt --key=akmworkshop.key
+
+kubectl --kubeconfig="cerX-frontend-jp-osa" create secret tls wildcard-cert  --namespace kube-system --cert=akmworkshop.crt --key=akmworkshop.key
+kubectl --kubeconfig="cerX-api-jp-osa" create secret tls wildcard-cert  --namespace kube-system --cert=akmworkshop.crt --key=akmworkshop.key
+kubectl --kubeconfig="cerX-frontend-jp-osa" create secret tls wildcard-cert  --namespace default --cert=akmworkshop.crt --key=akmworkshop.key
+kubectl --kubeconfig="cerX-api-jp-osa" create secret tls wildcard-cert  --namespace default --cert=akmworkshop.crt --key=akmworkshop.key
+
+kubectl --kubeconfig="cerX-frontend-us-mia" create secret tls wildcard-cert  --namespace kube-system --cert=akmworkshop.crt --key=akmworkshop.key
+kubectl --kubeconfig="cerX-api-us-mia" create secret tls wildcard-cert  --namespace kube-system --cert=akmworkshop.crt --key=akmworkshop.key
+kubectl --kubeconfig="cerX-frontend-us-mia" create secret tls wildcard-cert  --namespace default --cert=akmworkshop.crt --key=akmworkshop.key
+kubectl --kubeconfig="cerX-api-us-mia" create secret tls wildcard-cert  --namespace default --cert=akmworkshop.crt --key=akmworkshop.key
+
+kubectl --kubeconfig="cerX-frontend-us-lax" create secret tls wildcard-cert  --namespace kube-system --cert=akmworkshop.crt --key=akmworkshop.key
+kubectl --kubeconfig="cerX-api-us-lax" create secret tls wildcard-cert  --namespace kube-system --cert=akmworkshop.crt --key=akmworkshop.key
+kubectl --kubeconfig="cerX-frontend-us-lax" create secret tls wildcard-cert  --namespace default --cert=akmworkshop.crt --key=akmworkshop.key
+kubectl --kubeconfig="cerX-api-us-lax" create secret tls wildcard-cert  --namespace default --cert=akmworkshop.crt --key=akmworkshop.key
+
+
+
+2. Modify the frontend.yaml file to match your frontend configuration (harbor server config)
+3. Upload the frontend.yaml into your git repository in the /frontend/frontent.yaml folder. 
+
+4. Modify the api.yaml file to match your frontend configuration (harbor server config)
+5. Upload the api.yaml into your git repository in the /api/api.yaml folder. 
+

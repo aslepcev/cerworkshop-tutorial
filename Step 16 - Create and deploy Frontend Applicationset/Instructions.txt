@@ -1,0 +1,3 @@
+1. Modify the frontendappset.yaml file to match your repository. 
+2. Run the following command: kubectl --kubeconfig="mgmt-cluster-kubeconfig.yaml" apply -f frontendappset.yaml
+3. Go to your ArgoCD and verify the Frontend deployment is active. 
